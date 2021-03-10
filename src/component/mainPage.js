@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class MainPage extends Component {
     render() {
+        const { ToggleSearchBtn } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -338,7 +339,7 @@ class MainPage extends Component {
                 </div>
                 <div className="open-search">
                     <button
-                        onClick={() => this.setState({ showSearchPage: true })}
+                        onClick={() => ToggleSearchBtn(1)}
                     >
                         Add a book
                     </button>

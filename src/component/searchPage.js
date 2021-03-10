@@ -2,13 +2,13 @@ import React, { Component } from "react";
 
 class SearchPage extends Component {
     render () {
+        const { ToggleSearchBtn } = this.props;
         return (
             <div className="search-books">
                         <div className="search-books-bar">
                             <button
                                 className="close-search"
-                                onClick={() =>
-                                    this.setState({ showSearchPage: false })
+                                onClick={() =>ToggleSearchBtn()
                                 }
                             >
                                 Close
