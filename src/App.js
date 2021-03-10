@@ -3,6 +3,7 @@ import React from "react";
 import "./App.css";
 import SearchPage from "./component/searchPage";
 import MainPage from "./component/mainPage";
+import { Route } from "react-router-dom";
 class BooksApp extends React.Component {
     constructor() {
         super();
@@ -26,11 +27,19 @@ class BooksApp extends React.Component {
     render() {
         return (
             <div className="app">
-                {this.state.showSearchPage ? (
-                    <SearchPage ToggleSearchBtn={this.ToggleSearchBtn}/>
-                ) : (
-                    <MainPage ToggleSearchBtn={this.ToggleSearchBtn} />
-                )}
+                <Route
+                    path="/search"
+                    render={() => (
+                        <SearchPage ToggleSearchBtn={this.ToggleSearchBtn} />
+                    )}
+                />
+                <Route
+                    exact
+                    path="/"
+                    render={() => (
+                        <MainPage ToggleSearchBtn={this.ToggleSearchBtn} />
+                    )}
+                />
             </div>
         );
     }

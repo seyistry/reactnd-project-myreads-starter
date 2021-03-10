@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class MainPage extends Component {
     render() {
@@ -338,11 +339,11 @@ class MainPage extends Component {
                     </div>
                 </div>
                 <div className="open-search">
-                    <button
+                    <Link to='/search'
                         onClick={() => ToggleSearchBtn(1)}
                     >
-                        Add a book
-                    </button>
+                        <button/>
+                    </Link>
                 </div>
             </div>
         );
