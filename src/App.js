@@ -26,7 +26,7 @@ class BooksApp extends React.Component {
 
     updateQuery = (query) => {
         this.setState(() => ({
-            query: query.trim(),
+            query: query.replace(/  +/g, ' '),
         }))
         this.search(query);
     };
