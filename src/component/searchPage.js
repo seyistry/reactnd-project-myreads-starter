@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import * as BooksAPI from "../BooksAPI";
 import { Link } from "react-router-dom";
+import BookList from "./bookComponent";
 
 class SearchPage extends Component {
     render() {
-        const { ToggleSearchBtn } = this.props;
+        const { query, updateQuery, searchedBooks } = this.props;
         return (
             <div className="search-books">
-                {console.log(BooksAPI.search('art'))}
                 <div className="search-books-bar">
                     <Link className="close-search" to="/">
                         Close
@@ -25,11 +25,22 @@ class SearchPage extends Component {
                         <input
                             type="text"
                             placeholder="Search by title or author"
+                            value={query}
+                            onChange={(event) =>
+                                updateQuery(event.target.value)
+                            }
                         />
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid" />
+                    <ol className="books-grid">
+                        {searchedBooks.map((books) => (
+                            <BookList
+                                key={books.id}
+                                books={books}
+                            />
+                        ))}
+                    </ol>
                 </div>
             </div>
         );
