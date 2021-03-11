@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 class BookList extends Component {
     render() {
-        const {key, books} = this.props
+        const {books} = this.props
         return (
-            <li key={key}>
+            <li>
                 <div className="book">
                     <div className="book-top">
                         <div

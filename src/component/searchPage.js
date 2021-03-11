@@ -34,7 +34,7 @@ class SearchPage extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {searchedBooks.map((books) => (
+                        {searchedBooks.filter(books => books.imageLinks !== undefined ).map((books) => (
                             <BookList
                                 key={books.id}
                                 books={books}
