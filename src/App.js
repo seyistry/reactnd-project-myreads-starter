@@ -24,12 +24,6 @@ class BooksApp extends React.Component {
         };
     }
 
-    // ToggleSearchBtn = (props) => {
-    //     return props === 1
-    //         ? this.setState({ showSearchPage: true })
-    //         : this.setState({ showSearchPage: false });
-    // };
-
     updateQuery = (query) => {
         this.setState(() => ({
             query: query.trim(),
@@ -72,7 +66,6 @@ class BooksApp extends React.Component {
                     path="/"
                     render={() => (
                         <MainPage
-                            ToggleSearchBtn={this.ToggleSearchBtn}
                             updateQuery
                         />
                     )}

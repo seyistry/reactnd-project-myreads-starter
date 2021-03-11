@@ -6,7 +6,6 @@ import ReadBook from "./readBook";
 
 class MainPage extends Component {
     render() {
-        const { ToggleSearchBtn } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
