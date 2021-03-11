@@ -5,7 +5,7 @@ import BookList from "./bookComponent";
 
 class SearchPage extends Component {
     render() {
-        const { query, updateQuery, searchedBooks } = this.props;
+        const { query, updateQuery, searchedBooks, updateBook } = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -38,6 +38,7 @@ class SearchPage extends Component {
                             <BookList
                                 key={books.id}
                                 books={books}
+                                updateBook={updateBook}
                             />
                         ))}
                     </ol>
