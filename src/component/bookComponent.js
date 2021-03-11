@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class BookList extends Component {
     render() {
-        const {books} = this.props
+        const { books, updateBook } = this.props;
         return (
             <li>
                 <div className="book">
@@ -12,12 +12,17 @@ class BookList extends Component {
                             style={{
                                 width: 128,
                                 height: 193,
-                                backgroundImage:
-                                    `url(${books.imageLinks.thumbnail})`,
+                                backgroundImage: `url(${
+                                    books.imageLinks.thumbnail
+                                })`,
                             }}
                         />
                         <div className="book-shelf-changer">
-                            <select>
+                            <select
+                                onChange={(event) =>
+                                    updateBook(books, event.target.value)
+                                }
+                            >
                                 <option value="move" disabled>
                                     Move to...
                                 </option>
