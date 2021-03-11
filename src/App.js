@@ -9,10 +9,12 @@ class BooksApp extends React.Component {
     constructor() {
         super();
         this.state = {
-            query: '',
+            query: "",
             currentReading: [],
             wantToRead: [],
             read: [],
+            shelfBooks: [],
+            isLoading: false,
             searchedBooks: [],
             /**
              * TODO: Instead of using this state variable to keep track of which page
@@ -23,14 +25,33 @@ class BooksApp extends React.Component {
             showSearchPage: false,
         };
     }
-    
+
+    getAllBooks() {
+        BooksAPI.getAll().then((shelfBooks) => {
+            this.setState({
+                shelfBooks,
+                isLoading: false,
+                currentReading: shelfBooks.filter(
+                    (books) => books.shelf === "currentlyReading"
+                ),
+                wantToRead: shelfBooks.filter(
+                    (books) => books.shelf === "wantToRead"
+                ),
+                read: shelfBooks.filter((books) => books.shelf === "read"),
+            });
+        });
+    }
+
+    componentDidMount() {
+        this.getAllBooks();
+    }
+
     updateQuery = (query) => {
         this.setState(() => ({
-            query: query.replace(/  +/g, ' '),
-        }))
+            query: query.replace(/  +/g, " "),
+        }));
         this.search(query);
     };
-
 
     search = (query) => {
         if (query.length > 0) {
@@ -49,11 +70,10 @@ class BooksApp extends React.Component {
     };
 
     updateBook = (book, shelf) => {
-        BooksAPI.update(book, shelf)
-        .then(( res ) => {
-            book.shelf = shelf
-        })
-    }
+        BooksAPI.update(book, shelf).then((res) => {
+            book.shelf = shelf;
+        });
+    };
 
     render() {
         return (
@@ -74,7 +94,9 @@ class BooksApp extends React.Component {
                     path="/"
                     render={() => (
                         <MainPage
-                            updateQuery
+                            currentReading={this.state.currentReading}
+                            wantToRead={this.state.wantToRead}
+                            read={this.state.read}
                         />
                     )}
                 />
