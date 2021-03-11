@@ -23,7 +23,7 @@ class BooksApp extends React.Component {
             showSearchPage: false,
         };
     }
-
+    
     updateQuery = (query) => {
         this.setState(() => ({
             query: query.replace(/  +/g, ' '),
@@ -35,11 +35,11 @@ class BooksApp extends React.Component {
     search = (query) => {
         if (query.length > 0) {
             BooksAPI.search(query)
-                .then((books) => {
-                    if (books.error) {
+                .then((res) => {
+                    if (res.error) {
                         this.setState({ searchedBooks: [] });
                     } else {
-                        this.setState({ searchedBooks: books });
+                        this.setState({ searchedBooks: res });
                     }
                 })
                 .catch(this.setState({ searchedBooks: [] }));
@@ -47,6 +47,13 @@ class BooksApp extends React.Component {
             this.setState({ searchedBooks: [] });
         }
     };
+
+    updateBook = (book, shelf) => {
+        BooksAPI.update(book, shelf)
+        .then(( res ) => {
+            book.shelf = shelf
+        })
+    }
 
     render() {
         return (
@@ -58,6 +65,7 @@ class BooksApp extends React.Component {
                             query={this.state.query}
                             updateQuery={this.updateQuery}
                             searchedBooks={this.state.searchedBooks}
+                            updateBook={this.updateBook}
                         />
                     )}
                 />
