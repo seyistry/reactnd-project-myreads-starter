@@ -6,6 +6,7 @@ import ReadBook from "./readBook";
 
 class MainPage extends Component {
     render() {
+        const { wantToRead, currentlyReading, read, updateBook } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -13,9 +14,9 @@ class MainPage extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <CurrentlyReading />
-                        <WantToRead />
-                        <ReadBook />
+                        <CurrentlyReading currentlyReading={currentlyReading} updateBook={updateBook} />
+                        <WantToRead wantToRead={wantToRead} updateBook={updateBook}/>
+                        <ReadBook read={read} updateBook={updateBook}/>
                     </div>
                 </div>
                 <div className="open-search">

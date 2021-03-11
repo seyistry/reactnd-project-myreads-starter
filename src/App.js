@@ -10,7 +10,7 @@ class BooksApp extends React.Component {
         super();
         this.state = {
             query: "",
-            currentReading: [],
+            currentlyReading: [],
             wantToRead: [],
             read: [],
             shelfBooks: [],
@@ -31,7 +31,7 @@ class BooksApp extends React.Component {
             this.setState({
                 shelfBooks,
                 isLoading: false,
-                currentReading: shelfBooks.filter(
+                currentlyReading: shelfBooks.filter(
                     (books) => books.shelf === "currentlyReading"
                 ),
                 wantToRead: shelfBooks.filter(
@@ -94,9 +94,10 @@ class BooksApp extends React.Component {
                     path="/"
                     render={() => (
                         <MainPage
-                            currentReading={this.state.currentReading}
+                            currentlyReading={this.state.currentlyReading}
                             wantToRead={this.state.wantToRead}
                             read={this.state.read}
+                            updateBook={this.updateBook}
                         />
                     )}
                 />
