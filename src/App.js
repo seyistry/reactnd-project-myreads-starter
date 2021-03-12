@@ -21,7 +21,7 @@ class BooksApp extends React.Component {
              * users can use the browser's back and forward buttons to navigate between
              * pages, as well as provide a good URL they can bookmark and share.
              */
-            showSearchPage: false,
+            // showSearchPage: false,
         };
     }
 
@@ -58,10 +58,10 @@ class BooksApp extends React.Component {
                     if (res.error) {
                         this.setState({ searchedBooks: [] });
                     } else {
+                        console.log(res);
                         this.setState({ searchedBooks: res });
                     }
                 })
-                .catch(this.setState({ searchedBooks: [] }));
         } else {
             this.setState({ searchedBooks: [] });
         }
