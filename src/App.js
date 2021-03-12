@@ -49,7 +49,6 @@ class BooksApp extends React.Component {
             query: query.replace(/  +/g, " "),
         }));
         this.search(query);
-        this.getAllBooks();
     };
 
     search = (query) => {
@@ -71,6 +70,7 @@ class BooksApp extends React.Component {
     updateBook = (book, shelf) => {
         BooksAPI.update(book, shelf).then((res) => {
             book.shelf = shelf;
+            this.getAllBooks();
         });
     };
 
