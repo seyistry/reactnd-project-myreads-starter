@@ -10,11 +10,10 @@ class BooksApp extends React.Component {
         super();
         this.state = {
             query: "",
-            currentlyReading: [],
-            wantToRead: [],
-            read: [],
+            // currentlyReading: [],
+            // wantToRead: [],
+            // read: [],
             shelfBooks: [],
-            isLoading: false,
             searchedBooks: [],
             /**
              * TODO: Instead of using this state variable to keep track of which page
@@ -30,7 +29,6 @@ class BooksApp extends React.Component {
         BooksAPI.getAll().then((shelfBooks) => {
             this.setState({
                 shelfBooks,
-                isLoading: false,
                 currentlyReading: shelfBooks.filter(
                     (books) => books.shelf === "currentlyReading"
                 ),
@@ -51,6 +49,7 @@ class BooksApp extends React.Component {
             query: query.replace(/  +/g, " "),
         }));
         this.search(query);
+        this.getAllBooks();
     };
 
     search = (query) => {
@@ -94,9 +93,10 @@ class BooksApp extends React.Component {
                     path="/"
                     render={() => (
                         <MainPage
-                            currentlyReading={this.state.currentlyReading}
-                            wantToRead={this.state.wantToRead}
-                            read={this.state.read}
+                            // currentlyReading={this.state.currentlyReading}
+                            // wantToRead={this.state.wantToRead}
+                            // read={this.state.read}
+                            shelfBooks={this.state.shelfBooks}
                             updateBook={this.updateBook}
                         />
                     )}
