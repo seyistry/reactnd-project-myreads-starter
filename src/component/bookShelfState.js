@@ -4,6 +4,7 @@ class BookShelfState extends Component {
     render() {
         const { books, updateBook } = this.props;
         return (
+            
             <select
                 value={books.shelf}
                 onChange={(event) => updateBook(books, event.target.value)}
@@ -14,7 +15,7 @@ class BookShelfState extends Component {
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>
-                <option value="none">
+                <option value="none" selected>
                     None
                 </option>
             </select>

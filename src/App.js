@@ -14,7 +14,7 @@ class BooksApp extends React.Component {
             // wantToRead: [],
             // read: [],
             shelfBooks: [],
-            searchedBooks: [],
+            searchedBooks: []
             /**
              * TODO: Instead of using this state variable to keep track of which page
              * we're on, use the URL in the browser's address bar. This will ensure that
@@ -26,16 +26,16 @@ class BooksApp extends React.Component {
     }
 
     getAllBooks() {
-        BooksAPI.getAll().then((shelfBooks) => {
+        BooksAPI.getAll().then(shelfBooks => {
             this.setState({
                 shelfBooks,
                 currentlyReading: shelfBooks.filter(
-                    (books) => books.shelf === "currentlyReading"
+                    books => books.shelf === "currentlyReading"
                 ),
                 wantToRead: shelfBooks.filter(
-                    (books) => books.shelf === "wantToRead"
+                    books => books.shelf === "wantToRead"
                 ),
-                read: shelfBooks.filter((books) => books.shelf === "read"),
+                read: shelfBooks.filter(books => books.shelf === "read")
             });
         });
     }
@@ -44,31 +44,46 @@ class BooksApp extends React.Component {
         this.getAllBooks();
     }
 
-    updateQuery = (query) => {
+    updateQuery = query => {
         this.setState(() => ({
-            query: query.replace(/  +/g, " "),
+            query: query.replace(/  +/g, " ")
         }));
         this.search(query);
     };
 
-    search = (query) => {
+    search = query => {
         if (query.length > 0) {
-            BooksAPI.search(query)
-                .then((res) => {
-                    if (res.error) {
-                        this.setState({ searchedBooks: [] });
-                    } else {
-                        console.log(res);
-                        this.setState({ searchedBooks: res });
+            BooksAPI.search(query).then(res => {
+                if (res.error) {
+                    this.setState({ searchedBooks: [] });
+                } else {
+                    for (let x = 0; x < this.state.shelfBooks.length; x++) {
+                        for (let y = 0; y < res.length; y++) {
+                            // res[y].shelf =
+                            //     this.state.shelfBooks[x].id === res[y].id
+                            //         ? (res[y].shelf = this.state.shelfBooks[
+                            //               x
+                            //           ].shelf)
+                            //         : "none";
+                            if (this.state.shelfBooks[x].id === res[y].id) {
+                                res[y].shelf = this.state.shelfBooks[x].shelf;
+                            // } else {
+                            //     res[y].shelf = "none";
+                            // }
+                        }
                     }
-                })
+                    // console.log(this.state.searchedBooks);
+                    this.setState({ searchedBooks: res });
+                }
+                // let e = res.map(e => e.id)
+            });
         } else {
             this.setState({ searchedBooks: [] });
         }
     };
 
     updateBook = (book, shelf) => {
-        BooksAPI.update(book, shelf).then((res) => {
+        BooksAPI.update(book, shelf).then(res => {
             book.shelf = shelf;
             this.getAllBooks();
         });
