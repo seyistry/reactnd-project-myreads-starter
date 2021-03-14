@@ -6,7 +6,7 @@ import ReadBook from "./readBook";
 
 class MainPage extends Component {
     render() {
-        const { wantToRead, currentlyReading, read, shelfBooks, updateBook } = this.props;
+        const {shelfBooks, updateBook } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">

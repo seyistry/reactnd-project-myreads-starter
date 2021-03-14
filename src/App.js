@@ -67,7 +67,8 @@ class BooksApp extends React.Component {
                             //         : "none";
                             if (this.state.shelfBooks[x].id === res[y].id) {
                                 res[y].shelf = this.state.shelfBooks[x].shelf;
-                            // } else {
+                            } 
+                            //else {
                             //     res[y].shelf = "none";
                             // }
                         }
