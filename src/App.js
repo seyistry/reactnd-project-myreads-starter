@@ -13,8 +13,8 @@ class BooksApp extends React.Component {
             // currentlyReading: [],
             // wantToRead: [],
             // read: [],
-            shelfBooks: [],
-            searchedBooks: []
+            shelfBooks: [], //stores all books in all categories
+            searchedBooks: [] // stores searched result in this state
             /**
              * TODO: Instead of using this state variable to keep track of which page
              * we're on, use the URL in the browser's address bar. This will ensure that
@@ -25,25 +25,29 @@ class BooksApp extends React.Component {
         };
     }
 
+    // this function loads all the books from the backend to the mainPage
     getAllBooks() {
         BooksAPI.getAll().then(shelfBooks => {
             this.setState({
                 shelfBooks,
-                currentlyReading: shelfBooks.filter(
-                    books => books.shelf === "currentlyReading"
-                ),
-                wantToRead: shelfBooks.filter(
-                    books => books.shelf === "wantToRead"
-                ),
-                read: shelfBooks.filter(books => books.shelf === "read")
+                // currentlyReading: shelfBooks.filter(
+                //     books => books.shelf === "currentlyReading"
+                // ),
+                // wantToRead: shelfBooks.filter(
+                //     books => books.shelf === "wantToRead"
+                // ),
+                // read: shelfBooks.filter(books => books.shelf === "read")
             });
         });
     }
 
+
+    //run the method getAllVooks when the page renders
     componentDidMount() {
         this.getAllBooks();
     }
 
+    //the function updates the text value used to query the backend
     updateQuery = query => {
         this.setState(() => ({
             query: query.replace(/  +/g, " ")
@@ -51,6 +55,7 @@ class BooksApp extends React.Component {
         this.search(query);
     };
 
+    // A functon that search through the backend and update the searchedBook state
     search = query => {
         if (query.length > 0) {
             BooksAPI.search(query).then(res => {
@@ -83,6 +88,8 @@ class BooksApp extends React.Component {
         }
     };
 
+    //function update book base on users preference, 
+    //and call getAllBooks to rerender the page
     updateBook = (book, shelf) => {
         BooksAPI.update(book, shelf).then(res => {
             book.shelf = shelf;
